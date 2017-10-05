@@ -1,6 +1,7 @@
 package info.pauek.quiz;
 
 import android.content.DialogInterface;
+import android.preference.PreferenceFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +19,44 @@ public class QuizActivity extends AppCompatActivity {
     private int ids_answers[] = {
             R.id.answer1, R.id.answer2, R.id.answer3, R.id.answer4
     };
-    private int correct_answer;
-    private int current_question;
     private String[] all_questions;
-    private boolean[] answer_is_correct;
-    private int[] answer;
+
     private TextView text_question;
     private RadioGroup group;
     private Button btn_next, btn_prev;
+
+    private int correct_answer;
+    private int current_question;
+    private boolean[] answer_is_correct;
+    private int[] answer;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.i("lifecycle", "onSaveInstanceState");
+        super.onSaveInstanceState(outState);
+        outState.putInt("correct_answer", correct_answer);
+        outState.putInt("current_question", current_question);
+        outState.putBooleanArray("answer_is_correct", answer_is_correct);
+        outState.putIntArray("answer", answer);
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i ("lifecycle", "onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.i("lifecycle", "onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i("lifecycle", "onDestroy");
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
